@@ -1,7 +1,6 @@
 import hashlib
 import os
 
-
 def binaryToHex(file_path):
     hash_func = hashlib.sha3_256()
     with open(file_path, "rb") as f:
@@ -12,18 +11,33 @@ def binaryToHex(file_path):
             hash_func.update(data)
     return hash_func.hexdigest()
 
+def main():
+    folder_path = 'task2'
+    file_hashes = []
 
-folder_path = 'task2'
+    # Calculate hashes for files
+    for file_name in os.listdir(folder_path):
+        file_path = os.path.join(folder_path, file_name)
+        if os.path.isfile(file_path):
+            file_hash = binaryToHex(file_path)
+            file_hashes.append(file_hash)
 
-file_hashes = []
+    # Sort file hashes
+    sorted_hashes = sorted(file_hashes)
 
-for file_name in os.listdir(folder_path):
-    file_path = os.path.join(folder_path, file_name)
-    if os.path.isfile(file_path):
-        file_hash = binaryToHex(file_path)
-        file_hashes.append(file_hash)
+    # Combine sorted hashes into a single string
+    combined_hash = ''.join(sorted_hashes)
 
-sorted_hashes = sorted(file_hashes)
-combined_hash = ''.join(sorted_hashes)
-final_hex_code = combined_hash[:64]
-print(final_hex_code)
+    # Replace 'your_email@example.com' with your actual email address
+    email = 'mrmijanjoy@gmail.com'
+
+    # Concatenate email in lowercase
+    combined_string = combined_hash.lower() + email.lower()
+
+    # Calculate SHA3-256 of the final string
+    final_hash = hashlib.sha3_256(combined_string.encode('utf-8')).hexdigest()
+
+    print(final_hash)
+
+if __name__ == "__main__":
+    main()
