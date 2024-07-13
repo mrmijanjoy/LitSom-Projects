@@ -28,7 +28,7 @@ def main():
     # Combine sorted hashes into a single string
     combined_hash = ''.join(sorted_hashes)
 
-    # Replace 'your_email@example.com' with your actual email address
+    # Email
     email = 'mrmijanjoy@gmail.com'
 
     # Concatenate email in lowercase
